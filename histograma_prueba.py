@@ -24,4 +24,3 @@ bin_centers = 0.5 * (edges[:-1] + edges[1:])
 plt.errorbar(bin_centers, entries, yerr=np.sqrt(entries), fmt='b.')
 
 plt.show()
-#%%

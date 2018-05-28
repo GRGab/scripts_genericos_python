@@ -31,6 +31,16 @@ magnitud_x       = 'Distancia (m)'
 ancho_bines      = 0.05 # Modificar o se va ver horrible
 ####
 
+plt.style.use('seaborn')
+
+#Estilos disponibles:
+['bmh', 'classic', 'dark_background', 'fast', 'fivethirtyeight', 'ggplot',
+ 'grayscale', 'seaborn-bright', 'seaborn-colorblind', 'seaborn-dark-palette',
+ 'seaborn-dark', 'seaborn-darkgrid', 'seaborn-deep', 'seaborn-muted',
+ 'seaborn-notebook', 'seaborn-paper', 'seaborn-pastel', 'seaborn-poster',
+ 'seaborn-talk', 'seaborn-ticks', 'seaborn-white', 'seaborn-whitegrid',
+ 'seaborn', 'Solarize_Light2', '_classic_test']
+
 
 fig, ax = plt.subplots()
 conteos, bordes_bines = np.histogram(valores_a_binear, bins=num_bines)
@@ -43,6 +53,10 @@ ax.bar(bordes_bines[:-1], conteos, align='edge', color='dodgerblue',
        yerr=error, capsize=3, width=ancho_bines)
 ax.set_title(titulo_hist, fontsize=16)
 ax.set_xlabel(magnitud_x, fontsize=14)
+ax.annotate('$N = $'+str(len(valores_a_binear))+'\n'+r'$N_{bines}$ = '+str(num_bines),
+            (.8, .8), xycoords='axes fraction',
+            backgroundcolor='w', fontsize=14)
+
 fig.tight_layout()
 
 # Guardar imagen

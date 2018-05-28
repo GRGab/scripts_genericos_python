@@ -20,12 +20,17 @@ os.chdir(r'un\path\cualquiera')
 #%%
 
 ####
-valores_a_binear = np.random.normal(size=10000)
-num_bines        = 100
+
+xs = np.linspace(0, 4, 10000)
+ys = np.sin(xs) + 0.2 * np.random.normal(size=10000)
+
 
 graficos_path    =  'Graficos'
-titulo_hist      = 'Título'
+titulo           = 'Título'
 magnitud_x       = 'Magnitud (unidades)'
+magnitud_y       = 'Magnitud (unidades)'
+anotacion        = 'Una anotación'
+
 ####
 
 plt.style.use('seaborn')
@@ -39,25 +44,11 @@ plt.style.use('seaborn')
  'seaborn', 'Solarize_Light2', '_classic_test']
 
 fig, ax = plt.subplots()
-conteos, bordes_bines, _ = plt.hist(valores_a_binear, bins=num_bines)
-# Opcional: especificar número o posición de bines
-# Opcional: normalizar con density=True
 
-# Graficar errores
-error = np.sqrt(conteos)
-# Opcional: normalizar el error si se normalizan los conteos:
-#error = np.sqrt(conteos)/np.sqrt(len(valores_a_binear))
-centros_bines = 0.5 * (bordes_bines[:-1] + bordes_bines[1:])
-plt.errorbar(centros_bines, conteos,
-             yerr=error,
-             fmt='none',
-             capsize=0,
-             ecolor='k')
-
+ax.plot(xs, ys, '.')
 ax.set_title(titulo_hist, fontsize=16)
 ax.set_xlabel(magnitud_x, fontsize=14)
-anotacion = ('$N = $' + str(len(valores_a_binear))+ '\n' +
-             r'$N_{bines}$ = ' + str(num_bines))
+ax.set_ylabel(magnitud_y, fontsize=14)
 ax.annotate(anotacion,
             (.8, .8), xycoords='axes fraction',
             backgroundcolor='w', fontsize=14)
